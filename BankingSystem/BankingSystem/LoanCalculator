@@ -1,0 +1,53 @@
+public class LoanCalculator
+{
+
+    // Part 3: Recursive Payment Schedule
+    public static void DisplayPaymentSchedule(int remainingMonths, decimal monthlyPayment)
+    {
+        //  Base Case: The stopping condition
+        if (remainingMonths == 0)
+        {
+            Console.WriteLine("Loan fully paid!");
+            return; // Stops the recursion
+        }
+
+        //Display the current payment
+        // (Tip: We can calculate the current month by looking at the remaining count)
+        Console.WriteLine($"Payment received: {monthlyPayment:C}. Months remaining: {remainingMonths}");
+
+        // Recursive Case: Call the same method with one less month
+        DisplayPaymentSchedule(remainingMonths - 1, monthlyPayment);
+    }
+
+    public static decimal CompoundInterest(decimal principal, decimal rate, int years)
+{
+    // Base Case: If no more years are left, return the final principal
+    if (years <= 0)
+    {
+        return principal;
+    }
+
+    // Calculate new principal (Principal + (Principal * Rate))
+   
+    decimal updatedPrincipal = principal * (1 + rate);
+
+    // Recursive Case: Call again with the new principal and one less year
+    return CompoundInterest(updatedPrincipal, rate, years - 1);
+}
+
+public static decimal SumDeposits(decimal[] deposits, int index)
+{
+    // Base Case: If the index is equal to the length, we've reached the end
+    if (index >= deposits.Length)
+    {
+        return 0; 
+    }
+
+    // Recursive Case: Current element + the sum of all remaining elements
+    // We increment the index by 1 to move to the next box in the array
+    return deposits[index] + SumDeposits(deposits, index + 1);
+}
+
+
+}
+

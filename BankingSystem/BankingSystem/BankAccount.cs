@@ -55,19 +55,17 @@ public class BankAccount
 
     // Instance Methods
 
-    public bool Deposit(decimal amount) // Removed the 's' to match your assignment requirements
+    public bool Deposit(decimal amount)
     {
         if (amount <= 0)
-        {
-            return false;
-        }
+            throw new ArgumentException("Deposit amount must be positive.");
 
-        _balance += amount;            // Use the private field
-        _bankTotalMoney += amount;     // Update bank total (static)
-        _transactionCounter++;         // Increment transaction count (static)
+        _balance += amount;
+        _bankTotalMoney += amount;
+        _transactionCounter++;
 
-        //Update transaction history
-        TransactionHistory.Add($"Deposit: +{amount:C}. New Balance: {_balance:C} | dd.MM.yyyy HH:mm:ss");
+        // Added DateTime.Now to make the timestamp real
+        TransactionHistory.Add($"Deposit: +{amount:C}. New Balance: {_balance:C} | {DateTime.Now:dd.MM.yyyy HH:mm:ss}");
 
         return true;
     }
@@ -75,19 +73,19 @@ public class BankAccount
     public bool Withdrawal(decimal amount)
     {
         if (amount <= 0)
-        {
-            return false;
-        }
+            throw new ArgumentException("Withdrawal must be positive.");
+
+        if (amount > _balance)
+            throw new InvalidOperationException("Insufficient funds.");
 
         _balance -= amount;
         _bankTotalMoney -= amount;
         _transactionCounter++;
 
-        //Update transaction history
-        TransactionHistory.Add($"Withdrawal: +{amount:C}. New Balance: {_balance:C} | dd.MM.yyyy HH:mm:ss");
+      
+        TransactionHistory.Add($"Withdrawal: -{amount:C}. New Balance: {_balance:C} | {DateTime.Now:dd.MM.yyyy HH:mm:ss}");
 
         return true;
-
     }
     public void DisplayAccountInfo()
     {
@@ -133,88 +131,88 @@ public class BankAccount
 
 
 
-// Overloaded Transfer Methods
+    // Overloaded Transfer Methods
 
-// 1. Simple Transfer (Amount only)
-public bool Transfer(BankAccount destinationAccount, decimal amount)
-{
-    
-    return Transfer(destinationAccount, amount, "Standard Transfer", false);
-}
-
-// 2. Transfer with Description
-public bool Transfer(BankAccount destinationAccount, decimal amount, string description)
-{
-    // Pass the custom description, but keep notification false
-    return Transfer(destinationAccount, amount, description, false);
-}
-
-// 3. Full Transfer (Amount, Description, and Notification)
-public bool Transfer(BankAccount destinationAccount, decimal amount, string description, bool sendNotification)
-{
-    // 1. Validation (Always check if you actually HAVE the money first!)
-    if (destinationAccount == null) return false;
-    if (amount <= 0 || amount > _balance) 
+    // 1. Simple Transfer (Amount only)
+    public bool Transfer(BankAccount destinationAccount, decimal amount)
     {
-        Console.WriteLine("Transfer failed: Insufficient funds or invalid amount.");
-        return false;
+
+        return Transfer(destinationAccount, amount, "Standard Transfer", false);
     }
 
-    // 2. The Exchange (The money leaves your account and enters theirs)
-    this.Withdrawal(amount);               // 'this' is the Sender
-    destinationAccount.Deposit(amount);  // 'destinationAccount' is the Receiver
-
-    // 3. Notification Logic (Now handles BOTH sides)
-    if (sendNotification)
+    // 2. Transfer with Description
+    public bool Transfer(BankAccount destinationAccount, decimal amount, string description)
     {
-        // Notification for the Sender (You)
-        Console.WriteLine($"[ALERT] {this.AccountHolder}: You sent {amount:C} to {destinationAccount.AccountHolder}.");
-        
-        // Notification for the Receiver
-        Console.WriteLine($"[ALERT] {destinationAccount.AccountHolder}: You received {amount:C} from {this.AccountHolder}.");
+        // Pass the custom description, but keep notification false
+        return Transfer(destinationAccount, amount, description, false);
     }
 
-    return true;
-}
-
-
-// Overloaded Calculate Interest Methods 
-
-// 1. Simple Interest (Default rate of 2% per month)
-public decimal CalculateInterest(int months)
-{
-    // Simplified version calling the custom rate version
-    return CalculateInterest(months, 0.02m);
-}
-
-// 2. Interest with Custom Rate (Simple Interest)
-public decimal CalculateInterest(int months, decimal customRate)
-{
-    // Calling the "master" method with compound set to false
-    return CalculateInterest(months, customRate, false);
-}
-
-// 3. Master Method (Handles Simple vs Compound)
-public decimal CalculateInterest(int months, decimal customRate, bool compound)
-{
-    if (months <= 0 || customRate < 0) return 0;
-
-    if (compound)
+    // 3. Full Transfer (Amount, Description, and Notification)
+    public bool Transfer(BankAccount destinationAccount, decimal amount, string description, bool sendNotification)
     {
-        // Formula: balance * (1 + rate)^months - balance
-        // We use (double) because Math.Pow requires doubles
-        double baseVal = 1 + (double)customRate;
-        double result = (double)_balance * Math.Pow(baseVal, months);
-        
-        // Subtract original balance to get only the INTEREST earned
-        return (decimal)result - _balance;
+        // 1. Validation (Always check if you actually HAVE the money first!)
+        if (destinationAccount == null) return false;
+        if (amount <= 0 || amount > _balance)
+        {
+            Console.WriteLine("Transfer failed: Insufficient funds or invalid amount.");
+            return false;
+        }
+
+        // 2. The Exchange (The money leaves your account and enters theirs)
+        this.Withdrawal(amount);               // 'this' is the Sender
+        destinationAccount.Deposit(amount);  // 'destinationAccount' is the Receiver
+
+        // 3. Notification Logic (Now handles BOTH sides)
+        if (sendNotification)
+        {
+            // Notification for the Sender (You)
+            Console.WriteLine($"[ALERT] {this.AccountHolder}: You sent {amount:C} to {destinationAccount.AccountHolder}.");
+
+            // Notification for the Receiver
+            Console.WriteLine($"[ALERT] {destinationAccount.AccountHolder}: You received {amount:C} from {this.AccountHolder}.");
+        }
+
+        return true;
     }
-    else
+
+
+    // Overloaded Calculate Interest Methods 
+
+    // 1. Simple Interest (Default rate of 2% per month)
+    public decimal CalculateInterest(int months)
     {
-        // Simple interest: balance * rate * months
-        return _balance * customRate * months;
+        // Simplified version calling the custom rate version
+        return CalculateInterest(months, 0.02m);
     }
-}
+
+    // 2. Interest with Custom Rate (Simple Interest)
+    public decimal CalculateInterest(int months, decimal customRate)
+    {
+        // Calling the "master" method with compound set to false
+        return CalculateInterest(months, customRate, false);
+    }
+
+    // 3. Master Method (Handles Simple vs Compound)
+    public decimal CalculateInterest(int months, decimal customRate, bool compound)
+    {
+        if (months <= 0 || customRate < 0) return 0;
+
+        if (compound)
+        {
+            // Formula: balance * (1 + rate)^months - balance
+            // We use (double) because Math.Pow requires doubles
+            double baseVal = 1 + (double)customRate;
+            double result = (double)_balance * Math.Pow(baseVal, months);
+
+            // Subtract original balance to get only the INTEREST earned
+            return (decimal)result - _balance;
+        }
+        else
+        {
+            // Simple interest: balance * rate * months
+            return _balance * customRate * months;
+        }
+    }
 
 
 }
