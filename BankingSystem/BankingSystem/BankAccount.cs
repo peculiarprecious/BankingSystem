@@ -11,9 +11,9 @@ public class BankAccount
 
     //Intance variables unique to each account
     public long AccountNumber { get; private set; }
-    public required string AccountHolder { get; set; }
+    public  string AccountHolder { get; set; }
     private decimal _balance;
-    public required string AccountType { get; set; } // "Savings" or "Current"
+    public string AccountType { get; set; } // "Savings" or "Current"
     public List<string> TransactionHistory { get; private set; } = new List<string>();
 
 

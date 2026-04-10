@@ -1,0 +1,15 @@
+C:\Users\USER\Desktop\DotnetCohort5\Week8-Precious\BankingSystem\BankingSystem\bin\Debug\net10.0\BankingSystem.exe
+C:\Users\USER\Desktop\DotnetCohort5\Week8-Precious\BankingSystem\BankingSystem\bin\Debug\net10.0\BankingSystem.deps.json
+C:\Users\USER\Desktop\DotnetCohort5\Week8-Precious\BankingSystem\BankingSystem\bin\Debug\net10.0\BankingSystem.runtimeconfig.json
+C:\Users\USER\Desktop\DotnetCohort5\Week8-Precious\BankingSystem\BankingSystem\bin\Debug\net10.0\BankingSystem.dll
+C:\Users\USER\Desktop\DotnetCohort5\Week8-Precious\BankingSystem\BankingSystem\bin\Debug\net10.0\BankingSystem.pdb
+C:\Users\USER\Desktop\DotnetCohort5\Week8-Precious\BankingSystem\BankingSystem\obj\Debug\net10.0\BankingSystem.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\USER\Desktop\DotnetCohort5\Week8-Precious\BankingSystem\BankingSystem\obj\Debug\net10.0\BankingSystem.AssemblyInfoInputs.cache
+C:\Users\USER\Desktop\DotnetCohort5\Week8-Precious\BankingSystem\BankingSystem\obj\Debug\net10.0\BankingSystem.AssemblyInfo.cs
+C:\Users\USER\Desktop\DotnetCohort5\Week8-Precious\BankingSystem\BankingSystem\obj\Debug\net10.0\BankingSystem.csproj.CoreCompileInputs.cache
+C:\Users\USER\Desktop\DotnetCohort5\Week8-Precious\BankingSystem\BankingSystem\obj\Debug\net10.0\BankingSystem.sourcelink.json
+C:\Users\USER\Desktop\DotnetCohort5\Week8-Precious\BankingSystem\BankingSystem\obj\Debug\net10.0\BankingSystem.dll
+C:\Users\USER\Desktop\DotnetCohort5\Week8-Precious\BankingSystem\BankingSystem\obj\Debug\net10.0\refint\BankingSystem.dll
+C:\Users\USER\Desktop\DotnetCohort5\Week8-Precious\BankingSystem\BankingSystem\obj\Debug\net10.0\BankingSystem.pdb
+C:\Users\USER\Desktop\DotnetCohort5\Week8-Precious\BankingSystem\BankingSystem\obj\Debug\net10.0\BankingSystem.genruntimeconfig.cache
+C:\Users\USER\Desktop\DotnetCohort5\Week8-Precious\BankingSystem\BankingSystem\obj\Debug\net10.0\ref\BankingSystem.dll
