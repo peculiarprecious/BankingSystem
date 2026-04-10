@@ -190,31 +190,38 @@ public class BankAccount
     // 2. Interest with Custom Rate (Simple Interest)
     public decimal CalculateInterest(int months, decimal customRate)
     {
-        // Calling the "master" method with compound set to false
+        // Calling the master method with compound set to false
         return CalculateInterest(months, customRate, false);
     }
 
     // 3. Master Method (Handles Simple vs Compound)
-    public decimal CalculateInterest(int months, decimal customRate, bool compound)
+   public decimal CalculateInterest(int months, decimal customRate, bool compound)
+{
+    if (months <= 0 || customRate < 0) return 0;
+
+    decimal interestEarned = 0;
+
+    if (compound)
     {
-        if (months <= 0 || customRate < 0) return 0;
-
-        if (compound)
-        {
-            // Formula: balance * (1 + rate)^months - balance
-            // We use (double) because Math.Pow requires doubles
-            double baseVal = 1 + (double)customRate;
-            double result = (double)_balance * Math.Pow(baseVal, months);
-
-            // Subtract original balance to get only the INTEREST earned
-            return (decimal)result - _balance;
-        }
-        else
-        {
-            // Simple interest: balance * rate * months
-            return _balance * customRate * months;
-        }
+        double baseVal = 1 + (double)customRate;
+        double result = (double)_balance * Math.Pow(baseVal, months);
+        interestEarned = (decimal)result - _balance;
     }
+    else
+    {
+        interestEarned = _balance * customRate * months;
+    }
+
+    
+    if (interestEarned > 0)
+    {
+        // Use your Deposit method to ensure balance, 
+        // bank-wide totals, and transaction history are all updated!
+        this.Deposit(interestEarned); 
+    }
+
+    return interestEarned;
+}
 
 
 }
