@@ -12,7 +12,8 @@ namespace BankingSystem
             // Initializing our classes
             AccountManager manager = new AccountManager();
             TransactionProcessor processor = new TransactionProcessor();
-
+            
+           
             DataSeedSamples();
 
             bool isActiveMenu = true;
@@ -388,6 +389,38 @@ namespace BankingSystem
             Console.WriteLine($"Interest Earned: {interestEarned:C}");
             Console.WriteLine($"New Account Balance: {account.Balance:C}");
         }
+
+
+static void HandlePaymentSchedule()
+{
+    Console.WriteLine("\n--- Loan Payment Schedule Setup ---");
+
+    // 1. Get and validate the number of months
+    int months;
+    while (true)
+    {
+        Console.Write("Enter total number of months for the loan: ");
+        if (int.TryParse(Console.ReadLine(), out months) && months > 0 && months <=12) break;
+        Console.WriteLine("Invalid entry! Please enter a positive integer.");
+    }
+
+    // 2. Get and validate the monthly payment amount
+    decimal payment;
+    while (true)
+    {
+        Console.Write("Enter the fixed monthly payment amount: ");
+        if (decimal.TryParse(Console.ReadLine(), out payment) && payment > 0) break;
+        Console.WriteLine("Invalid entry! Please enter a positive numerical amount.");
+    }
+
+    Console.WriteLine("\n--- STARTING SCHEDULE ---");
+    
+    // 3. Call your recursive method from the LoanCalculator class
+    LoanCalculator.DisplayPaymentSchedule(months, payment);
+    
+    Console.WriteLine("--- END OF SCHEDULE ---\n");
+}
+
 
     }
 }

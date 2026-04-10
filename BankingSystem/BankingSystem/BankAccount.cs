@@ -130,9 +130,6 @@ public class BankAccount
         Console.WriteLine("========================================\n");
     }
 
-
-
-
     // Overloaded Transfer Methods
 
     // 1. Simple Transfer (Amount only)

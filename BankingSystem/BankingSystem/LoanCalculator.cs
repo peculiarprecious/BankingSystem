@@ -1,4 +1,6 @@
-public class LoanCalculator
+namespace BankingSystem
+{
+    public class LoanCalculator
 {
 
     // Part 3: Recursive Payment Schedule
@@ -12,7 +14,7 @@ public class LoanCalculator
         }
 
         //Display the current payment
-        // (Tip: We can calculate the current month by looking at the remaining count)
+       
         Console.WriteLine($"Payment received: {monthlyPayment:C}. Months remaining: {remainingMonths}");
 
         // Recursive Case: Call the same method with one less month
@@ -50,4 +52,6 @@ public static decimal SumDeposits(decimal[] deposits, int index)
 
 
 }
+}
+
 
