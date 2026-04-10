@@ -102,7 +102,7 @@ public class BankAccount
         return _balance;
     }
 
-    // tatic Methods 
+    // Static Methods 
 
     public static int GetTotalAccounts()
     {
@@ -119,7 +119,7 @@ public class BankAccount
         return _transactionCounter;
     }
 
-    public static void DisplayBankStatistics()
+   /*  public static void DisplayBankStatistics()
     {
         Console.WriteLine("\n========================================");
         Console.WriteLine("       BANK STATISTICS           ");
@@ -129,6 +129,9 @@ public class BankAccount
         Console.WriteLine($"Total Money in the Bank System:   {_bankTotalMoney:C}");
         Console.WriteLine("========================================\n");
     }
+ */
+
+
 
     // Overloaded Transfer Methods
 
@@ -220,5 +223,20 @@ public class BankAccount
     return interestEarned;
 }
 
+public void ApplyInterest(int months, decimal? customRate = null, bool compound = false)
+{
+    // Use your existing CalculateInterest logic to get the amount
+    // If customRate is null, it uses 0.02m (2%)
+    decimal interestEarned = CalculateInterest(months, customRate ?? 0.02m, compound);
+
+    if (interestEarned > 0)
+    {
+        // Actually update the balance using your Deposit method
+        this.Deposit(interestEarned); 
+        
+        // Log it in the history
+        TransactionHistory.Add($"Interest Applied ({months} mo): +{interestEarned:C} | {DateTime.Now:dd/MM/yyyy}");
+    }
+}
 
 }

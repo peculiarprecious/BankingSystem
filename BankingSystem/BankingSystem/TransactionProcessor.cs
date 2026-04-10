@@ -18,7 +18,7 @@ public void UpdateBalance(ref decimal balance, decimal amount)
 
 public bool ProcessTransaction(decimal amount, string type, out string confirmationCode, out DateTime timestamp)
 {
-    // Validation: If the amount is zero or negative, we fail
+    // Validation: If the amount is zero or negative
     if (amount <= 0)
     {
         confirmationCode = "INVALID";
