@@ -81,35 +81,42 @@ namespace BankingSystem
                         BankAccount? acc = FindAccount();
                         if (acc != null)
                         {
-                            // Display the table header
-                            Console.WriteLine($"\n{"Account Number",-15} | {"Account Holder",-20} | {"Balance",15}");
-                            Console.WriteLine(new string('-', 55));
-                            // Display the data
-                            Console.WriteLine($"{acc.AccountNumber,-15} | {acc.AccountHolder,-20} | {acc.Balance,15:C}");
+                            acc.DisplayAccountInfo();
                         }
                         break;
-                        case 5:
-
-                        break;
-                    case 6:
+                    case 5:
                         //Display all Account Info
                         DisplayAccounts();
                         break;
+                    case 6:
+                        //Transfer Money (Overload
+                        break;
                     case 7:
+                        //Calculate Interest
 
                         break;
                     case 8:
+                        //Display Payment Schedule (Recursive
 
                         break;
                     case 9:
+                        //Calculate Compound Interest (Recursive
 
                         break;
                     case 10:
-                        decimal tempBal = 100m;
-                        processor.TryUpdateBalance(tempBal, 50m); // Value
-                        Console.WriteLine($"After Value call: {tempBal:C}");
-                        processor.UpdateBalance(ref tempBal, 50m); // Ref
-                        Console.WriteLine($"After Ref call: {tempBal:C}");
+                        //Sum Deposit Array (Recursive
+                       
+                        break;
+
+                    case 11:
+                    //Test Pass by Value/Reference
+                        break;
+
+                    case 12:
+                    //Display Bank Statistics
+                    BankAccount.DisplayBankStatistics();
+
+
                         break;
                     case 13:
                         isActiveMenu = false;
@@ -129,15 +136,16 @@ namespace BankingSystem
             Console.WriteLine("1. Create New Account");
             Console.WriteLine("2. Deposit Money");
             Console.WriteLine("3. Withdraw Money");
-            Console.WriteLine("4. Transfer Money (Overload)");
-            Console.WriteLine("5. Calculate Interest");
-            Console.WriteLine("6. View Account Info");
-            Console.WriteLine("7. Display Payment Schedule (Recursive)");
-            Console.WriteLine("8. Calculate Compound Interest (Recursive)");
-            Console.WriteLine("9. Sum Deposit Array (Recursive)");
-            Console.WriteLine("10. Test Pass by Value/Reference");
-            Console.WriteLine("11. Display Bank Statistics");
-            Console.WriteLine("12. Exit");
+            Console.WriteLine("4. View Individual Account Info)");
+            Console.WriteLine("5.View Account Info");
+            Console.WriteLine("6. Transfer Money (Overload)");
+            Console.WriteLine("7. Calculate Interest");
+            Console.WriteLine("8. Display Payment Schedule (Recursive)");
+            Console.WriteLine("9. Calculate Compound Interest (Recursive)");
+            Console.WriteLine("10. Sum Deposit Array (Recursive)");
+            Console.WriteLine("11. Test Pass by Value/Reference");
+            Console.WriteLine("12. Display Bank Statistics");
+            Console.WriteLine("13. Exit");
             Console.Write("\nSelect an option: ");
         }
 

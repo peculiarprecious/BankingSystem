@@ -87,14 +87,16 @@ public class BankAccount
 
         return true;
     }
-    public void DisplayAccountInfo()
-    {
-        Console.WriteLine("\n--- Account Details ---");
-        Console.WriteLine($"Account Holder: {AccountHolder}");
-        Console.WriteLine($"Account Number: {AccountNumber}");
-        Console.WriteLine($"Account Type:   {AccountType}");
-        Console.WriteLine($"Account Balance: {_balance:C}");
-    }
+   public void DisplayAccountInfo()
+{
+    // Table Header
+    Console.WriteLine($"\n{"Account Number",-15} | {"Account Holder",-20} | {"Account Type",-12} | {"Balance (£)",15} | {"Date & Time",-15}");
+    Console.WriteLine(new string('-', 90));
+
+    // Table Row (using the instance's own data)
+    Console.WriteLine($"{AccountNumber,-15} | {AccountHolder,-20} | {AccountType,-12} | {_balance,15:C} | {DateTime.Now,-15:dd MMM yyyy}");
+}
+
     public decimal GetBalance()
     {
         return _balance;
